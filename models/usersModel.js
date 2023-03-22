@@ -33,3 +33,26 @@ exports.getSubject = (req, res) => {
         res.status(200).json(data)
      })
 }
+
+
+exports.deleteErrand = (req, res) => {
+    
+    User.findByIdAndDelete(res.params.id)
+      .then(data => {
+        if(!data) {
+            res.status(400).json({
+                message: 'Could not find that errand'
+            }) 
+            return
+        }
+       
+        res.status(200).json({ id: data._id})
+      })
+      
+      .catch(err => {
+        res.status(500).json({
+            message: 'Something went wrong with deleting the errand',
+            err: err.message
+        })
+      })
+}
