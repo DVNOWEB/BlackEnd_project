@@ -1,0 +1,36 @@
+const mongoose = require('mongoose')
+
+const commentSchema = new mongoose.Schema(
+  {
+    case: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Case',
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    status: {
+      type: Number,
+      enum: [1, 2, 3],
+      default: 1,
+    },
+    
+  },{ timestamps: true },
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+)
+
+commentSchema.virtual('caseDetails', {
+  ref: 'Case',
+  localField: 'case',
+  foreignField: 'id',
+  justOne: true,
+})
+
+const Comment = mongoose.model('Comment', commentSchema)
+
+module.exports = Comment
