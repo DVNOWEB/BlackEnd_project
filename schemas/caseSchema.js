@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-// const Comment = require('./commentModel')
 
 const caseSchema = new mongoose.Schema(
   {
@@ -26,19 +25,12 @@ const caseSchema = new mongoose.Schema(
         ref: 'Comment',
       },
     ],
-    createdAt: {
-      type: Date,
-      default: Date.now,
-    },
-    updatedAt: {
-      type: Date,
-      default: Date.now,
-    },
-  },
+    
+  },{ timestamps: true },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
-  }
+  }, 
 )
 
 caseSchema.virtual('commentDetails', {
@@ -48,7 +40,6 @@ caseSchema.virtual('commentDetails', {
     required: true,
   },
 })
-
 
 caseSchema.methods.updateCaseStatus = async function () {
   if (this.comments.length === 0) {
@@ -65,34 +56,6 @@ caseSchema.methods.updateCaseStatus = async function () {
   return this
 }
 
-
-
-
 const Case = mongoose.model('Case', caseSchema)
 
 module.exports = Case
-
-
-
-// const mongoose = require('mongoose')
-
-// const caseSchema = mongoose.Schema({
-//     email:    {type: String, required: true},
-//     subject:  {type: String, required: false},
-//     message:  {type: Array, required: true},
-//     status:   {type: Number, default: 1}
-
-// }, { timestamps: true })
-
-// // const commentSchema = mongoose.Schema({
-// //     email:    {type: String, required: true},
-// //     message:  {type: String, required: true}
-
-// // }, { timestamps: true })
-
-// module.exports = mongoose.model('Case', caseSchema)
-
-
-
-
-// module.exports = mongoose.model('Comment', commentSchema)

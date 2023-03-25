@@ -25,6 +25,7 @@ router.get('/:id/comments', commentModel.getCommentsByCaseId)
 router.post('/:id/comments', commentModel.createComment)
 
 // Update status of a specific comment by comment ID
+// (Will only change the case status if it is the latest comment)
 router.put('/comments/:id/status', commentModel.updateCaseStatus)
 
 module.exports = router

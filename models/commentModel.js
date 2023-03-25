@@ -51,7 +51,6 @@ const createComment = async (req, res, next) => {
   } catch (err) {
     next(err)
   }
-  
 }
 
 const getCommentsByCaseId = async (req, res, next) => {
@@ -60,40 +59,16 @@ const getCommentsByCaseId = async (req, res, next) => {
     const comments = await Comment.find({ case: id }).lean()
     res.json(comments)
   } catch (err) {
-    // res.status(500).json({
-    //   message: 'Something went wrong getting the comment',
-    //   err: err.message
-    // })
-    next(err)
+    res.status(404).json({
+      message: 'Could not find the case',
+      err: err.message
+    })
+    // next(err)
   }
 }
-
-
-
 
 module.exports = {
   createComment,
   getCommentsByCaseId,
   updateCaseStatus,
 }
-
-
-
-// const Comment = require('../schemas/commentSchema')
-
-// exports.newComment = (req, res) => {
-
-//     const {email, message } = req.body
-  
-  
-//     Comment.create({email, message })
-//         .then(data => {
-//             res.status(201).json(data)
-//         })
-//         .catch(err => {
-//             console.log({
-//                 message: 'Failed to create comment',
-//                 err: err.message})
-//         })
-//   }
-  

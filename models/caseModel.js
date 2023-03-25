@@ -1,6 +1,4 @@
 const Case = require('../schemas/caseSchema')
-// const mongoose = require('mongoose')
-
 
 exports.createCase = async (req, res, next) => {
   try {
@@ -41,7 +39,6 @@ exports.getCaseById = async (req, res, next) => {
     next(err)
   }
 }
-
 
 exports.updateCaseStatus = async (req, res, next) => {
   try {
