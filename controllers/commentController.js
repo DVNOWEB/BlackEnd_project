@@ -1,7 +1,11 @@
-// const router = require('express').Router()
-// const commentModel = require('../models/commentModel')
+const express = require('express')
+const router = express.Router()
+const commentModel = require('../models/commentModel')
 
-// // POST COMMENT
-// router.post('/:id', commentModel.newComment)
+// Add comment to a specific case by case ID
+router.post('/cases/:id/comments', commentModel.createComment)
 
-// module.exports = router
+// Get comments for a specific case by its ID
+router.get('/cases/:id/comments', commentModel.getCommentsByCaseId)
+
+module.exports = router
