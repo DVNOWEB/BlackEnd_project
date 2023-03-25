@@ -28,7 +28,7 @@ const postCase = () => {
     method: 'POST',
     body: JSON.stringify(newPost),
     headers: {
-      'Content-Type': 'application/json-patch+json',
+      'Content-Type': 'application/json',
     },
   })
     .then((res) => {
