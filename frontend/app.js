@@ -1,6 +1,6 @@
 // API key
 
-// const CASE_URL = 'https://fnd22-shared.azurewebsites.net/api/Cases/'
+const CASE_URL = 'http://localhost:8082/api/cases/'
 
 const email = document.querySelector('#email_input')
 const subject = document.querySelector('#subject_input')
@@ -28,7 +28,7 @@ const postCase = () => {
     method: 'POST',
     body: JSON.stringify(newPost),
     headers: {
-      'Content-Type': 'application/json-patch+json',
+      'Content-Type': 'application/json',
     },
   })
     .then((res) => {
