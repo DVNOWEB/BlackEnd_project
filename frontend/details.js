@@ -1,6 +1,9 @@
+// define port
+const PORT = 3000
+
 const id = new URLSearchParams(window.location.search).get('id')
-const CASE_URL = 'https://fnd22-shared.azurewebsites.net/api/Cases/'
-const COMMENT_URL = 'https://fnd22-shared.azurewebsites.net/api/Comments'
+const CASE_URL = 'http://localhost:3000/api/cases/'
+const COMMENT_URL = 'http://localhost:3000/api/comments/'
 const wrapper = document.querySelector('.container_details')
 const form = document.querySelector('.userInput')
 const inline = document.querySelector('.inline')
@@ -69,7 +72,7 @@ const setStatus = (statusId) => {
 }
 
 const getCase = () => {
-  return fetch(CASE_URL + id)
+  return fetch(CASE_URL)
     .then((res) => res.json())
     .then((data) => {
       console.log(data)
@@ -77,7 +80,7 @@ const getCase = () => {
       caseId = data.id
 
       if (data.status) {
-        setStatus(data.status.id)
+        setStatus(data.status._id)
       }
 
       time_add.innerText = data.created.replace('T', ' ').substring(0, 16)
@@ -131,7 +134,7 @@ const postComment = () => {
     method: 'POST',
     body: JSON.stringify(newComment),
     headers: {
-      'Content-Type': 'application/json-patch+json',
+      'Content-Type': 'application/json',
     },
   })
     .then((res) => {
@@ -141,15 +144,15 @@ const postComment = () => {
     .catch((err) => console.log(err))
 }
 
-const putStatus = (id, statusId) => {
-  return fetch(CASE_URL + id, {
+const putStatus = (_id, statusId) => {
+  return fetch(CASE_URL, {
     method: 'PUT',
     body: JSON.stringify({
-      id: id,
+      id: _id,
       statusId: statusId,
     }),
     headers: {
-      'Content-Type': 'application/json-patch+json',
+      'Content-Type': 'application/json',
     },
   })
     .then((res) => {
