@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task List</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="app.js" defer></script>
+</head>
+
+<body>
+  <div class="container">
+
+    <div class="task_list">
+      <div class="card">
+        <div class="card_content">
+          <span class="card_title">case management</span>
+          <div class="card_box">
+
+            <form id="task_form">
+
+              <div class="input_fields">
+                <input type="email" name="task" id="email_input" placeholder="Email">
+                <input type="text" name="task" id="subject_input" placeholder="Subject">
+                <textarea name="message" id="message_input" placeholder="Your message..."></textarea>
+              </div>
+
+              <input type="submit" value="Add Task" class="btn">
+            </form>
+          </div>
+        </div>
+
+        <div class="card_action">
+          <span id="task_title">all cases</span>
+          <div class="input_fields">
+            <input type="text" name="filter" id="filter" placeholder="Filter Task">
+            <label for="filter"></label>
+          </div>
+          <!-- <ul class="collection"></ul> -->
+        </div>
+      </div>
+    </div>
+    <!-- Cases container -->
+    <div class="case_container"></div>
+
+  </div>
+
+</body>
+
+</html>
