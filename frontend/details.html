@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Details</title>
+</head>
+
+<body>
+  <div class="wrapper">
+    <div class="container_details">
+      <div class="inline">
+        <div class="statusInfo">
+
+          <input class="green" type="radio" id="green_btn" name="switch" value="yes" />
+          <label for="green_btn">Avslutad</label>
+          <input class="orange" type="radio" id="orange_btn" name="switch" value="maybe" />
+          <label for="orange_btn">Pågående</label>
+          <input class="red" type="radio" id="red_btn" name="switch" value="no" />
+          <label for="red_btn">Ej påbörjad</label>
+
+        </div>
+        <span class="time_add"></span>
+
+      </div>
+      <div class="card">
+        <h2></h2>
+        <p class="p_details detailsEmail"></p>
+        <p class="p_details detailsMessage"></p>
+      </div>
+      <h2>Comments:</h2>
+      <ul class="commentList" id="commentList">
+        <p class="comment"></p>
+      </ul>
+
+
+      <form class="userInput">
+        <input type="email" placeholder="Email" class="emailInput">
+        <textarea class="messageInput" placeholder="New comment..."></textarea>
+        <input type="submit" value="Add Comment" class="btn">
+      </form>
+      <!-- Link back to first page -->
+      <div class="parent_back_link">
+        <input class="btn" type="button" value="Back to first page" onclick="location.href='index.html'">
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+  <script src="details.js"></script>
+</body>
+
+</html>
