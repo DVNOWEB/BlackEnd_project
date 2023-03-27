@@ -2,13 +2,8 @@
 const PORT = 3000
 
 const id = new URLSearchParams(window.location.search).get('id')
-<<<<<<< HEAD
-const CASE_URL = 'http://localhost:3000/api/cases/'
-const COMMENT_URL = 'http://localhost:3000/api/comments/'
-=======
 const CASE_URL = 'http://localhost:8082/api/cases/'
 const COMMENT_URL = '/comments'
->>>>>>> 7aa88a806f07efc6ac59bc4ddad3fc2db63c8a85
 const wrapper = document.querySelector('.container_details')
 const form = document.querySelector('.userInput')
 const inline = document.querySelector('.inline')
