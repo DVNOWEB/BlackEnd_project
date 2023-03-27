@@ -1,6 +1,6 @@
 // API key
 
-// const CASE_URL = 'https://fnd22-shared.azurewebsites.net/api/Cases/'
+const CASE_URL = 'http://localhost:8082/api/cases/'
 
 const email = document.querySelector('#email_input')
 const subject = document.querySelector('#subject_input')
@@ -52,9 +52,9 @@ const postCase = () => {
               element.subject,
               element.email,
               element.message,
-              element.created,
-              element.id,
-              element.status.id
+              element.createdAt,
+              element._id,
+              element.status
             )
           })
         })
@@ -83,9 +83,9 @@ const getCase = () => {
           element.subject,
           element.email,
           element.message,
-          element.created,
-          element.id,
-          element.status.id
+          element.createdAt,
+          element._id,
+          element.status
         )
       })
 
@@ -93,7 +93,7 @@ const getCase = () => {
     })
 }
 
-const caseList = (subject, email, message, time, id, statusId) => {
+const caseList = (subject, email, message, createdAt, id, statusId) => {
   // Create the container element
   const caseContainer = document.createElement('div')
   caseContainer.classList.add('user', 'user_dark')
@@ -130,14 +130,23 @@ const caseList = (subject, email, message, time, id, statusId) => {
     statusNotStarted.classList.add('red')
   }
 
+
+  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
+
+
   // Create the time_add element
   const timeAdd = document.createElement('span')
   timeAdd.classList.add('time_add')
-  timeAdd.textContent = time.replace('T', ' ').substring(0, 16)
+  // timeAdd.textContent = time.replace('T', ' ').substring(0, 16)
+  timeAdd.textContent = createdAt
+  // createdAt.replace('T', ' ').substring(0, 16)
 
   // Append the statusInfo and time_add elements to the inline element
   inlineContainer.appendChild(statusInfo)
   inlineContainer.appendChild(timeAdd)
+
+  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR  
+
 
   // Append the inline element to the caseContainer element
   caseContainer.appendChild(inlineContainer)
@@ -155,8 +164,12 @@ const caseList = (subject, email, message, time, id, statusId) => {
   messageEl.classList.add('user_message')
   messageEl.textContent = message
 
-  const limitedMessage = message.slice(0, 50) + '...'
-  messageEl.textContent = limitedMessage
+  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
+
+  // const limitedMessage = message.slice(0, 50) + '...'
+  // messageEl.textContent = limitedMessage
+
+  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
 
   // Create the "Add comment" link
   const addCommentLink = document.createElement('a')
@@ -189,9 +202,9 @@ const filterCases = () => {
       element.subject,
       element.email,
       element.message,
-      element.created,
-      element.id,
-      element.status.id
+      element.createdAt,
+      element._id,
+      element.status
     )
   })
 }
