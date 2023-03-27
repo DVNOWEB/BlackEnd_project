@@ -3,7 +3,11 @@ const PORT = 3000
 
 // API key
 
+<<<<<<< HEAD
 const CASE_URL = `http://localhost:${PORT}/api/cases/`
+=======
+const CASE_URL = 'http://localhost:8082/api/cases/'
+>>>>>>> 7aa88a806f07efc6ac59bc4ddad3fc2db63c8a85
 
 const email = document.querySelector('#email_input')
 const subject = document.querySelector('#subject_input')
@@ -55,9 +59,9 @@ const postCase = () => {
               element.subject,
               element.email,
               element.message,
-              element.created,
-              element.id,
-              element.status.id
+              element.createdAt,
+              element._id,
+              element.status
             )
           })
         })
@@ -85,9 +89,9 @@ const getCase = () => {
           element.subject,
           element.email,
           element.message,
-          element.created,
-          element.id,
-          element.status.id
+          element.createdAt,
+          element._id,
+          element.status
         )
       })
 
@@ -95,6 +99,7 @@ const getCase = () => {
     })
 }
 
+<<<<<<< HEAD
 // const caseList = (subject, email, message, time, id, statusId) => {
 //   // Create the container element
 //   const caseContainer = document.createElement('div')
@@ -204,6 +209,9 @@ const getCase = () => {
 
 
 const caseList = (subject, email, message, time, id, statusId) => {
+=======
+const caseList = (subject, email, message, createdAt, id, statusId) => {
+>>>>>>> 7aa88a806f07efc6ac59bc4ddad3fc2db63c8a85
   // Create the container element
   const caseContainer = document.createElement('div')
   caseContainer.classList.add('user', 'user_dark')
@@ -240,14 +248,27 @@ const caseList = (subject, email, message, time, id, statusId) => {
     statusNotStarted.classList.add('red')
   }
 
+
+  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
+
+
   // Create the time_add element
   const timeAdd = document.createElement('span')
   timeAdd.classList.add('time_add')
+<<<<<<< HEAD
   timeAdd.textContent = time
+=======
+  // timeAdd.textContent = time.replace('T', ' ').substring(0, 16)
+  timeAdd.textContent = createdAt
+  // createdAt.replace('T', ' ').substring(0, 16)
+>>>>>>> 7aa88a806f07efc6ac59bc4ddad3fc2db63c8a85
 
   // Append the statusInfo and time_add elements to the inline element
   inlineContainer.appendChild(statusInfo)
   inlineContainer.appendChild(timeAdd)
+
+  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR  
+
 
   // Append the inline element to the caseContainer element
   caseContainer.appendChild(inlineContainer)
@@ -265,8 +286,12 @@ const caseList = (subject, email, message, time, id, statusId) => {
   messageEl.classList.add('user_message')
   messageEl.textContent = message
 
-  const limitedMessage = message.slice(0, 50) + '...'
-  messageEl.textContent = limitedMessage
+  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
+
+  // const limitedMessage = message.slice(0, 50) + '...'
+  // messageEl.textContent = limitedMessage
+
+  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
 
   // Create the "Add comment" link
   const addCommentLink = document.createElement('a')
@@ -283,3 +308,30 @@ const caseList = (subject, email, message, time, id, statusId) => {
   // Add the caseContainer element to the container element
   container.appendChild(caseContainer)
 }
+<<<<<<< HEAD
+=======
+getCase()
+
+const filterCases = () => {
+  const filterValue = document.querySelector('#filter').value.toLowerCase()
+  const filteredCases = cases.filter(
+    (caseItem) =>
+      caseItem.subject.toLowerCase().includes(filterValue) ||
+      caseItem.email.toLowerCase().includes(filterValue) ||
+      caseItem.message.toLowerCase().includes(filterValue)
+  )
+  container.innerHTML = '' // Clear the container element
+  filteredCases.forEach((element) => {
+    caseList(
+      element.subject,
+      element.email,
+      element.message,
+      element.createdAt,
+      element._id,
+      element.status
+    )
+  })
+}
+
+document.querySelector('#filter').addEventListener('input', filterCases)
+>>>>>>> 7aa88a806f07efc6ac59bc4ddad3fc2db63c8a85

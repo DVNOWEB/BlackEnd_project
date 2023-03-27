@@ -2,8 +2,13 @@
 const PORT = 3000
 
 const id = new URLSearchParams(window.location.search).get('id')
+<<<<<<< HEAD
 const CASE_URL = 'http://localhost:3000/api/cases/'
 const COMMENT_URL = 'http://localhost:3000/api/comments/'
+=======
+const CASE_URL = 'http://localhost:8082/api/cases/'
+const COMMENT_URL = '/comments'
+>>>>>>> 7aa88a806f07efc6ac59bc4ddad3fc2db63c8a85
 const wrapper = document.querySelector('.container_details')
 const form = document.querySelector('.userInput')
 const inline = document.querySelector('.inline')
@@ -83,7 +88,7 @@ const getCase = () => {
         setStatus(data.status._id)
       }
 
-      time_add.innerText = data.created.replace('T', ' ').substring(0, 16)
+      // time_add.innerText = data.created.replace('T', ' ').substring(0, 16)
 
       const card = document.querySelector('div')
 
@@ -110,7 +115,7 @@ const getCase = () => {
       commentList.innerHTML = ''
       for (let i = 0; i < data.comments.length; i++) {
         const time_add = document.createElement('span')
-        time_add.innerText = data.comments[i].created
+        time_add.innerText = data.comments[i].createdAt
           .replace('T', ' ')
           .substring(0, 16)
         commentList.appendChild(time_add)
@@ -130,7 +135,7 @@ const getCase = () => {
 }
 
 const postComment = () => {
-  return fetch(COMMENT_URL, {
+  return fetch(CASE_URL + caseId + COMMENT_URL, {
     method: 'POST',
     body: JSON.stringify(newComment),
     headers: {
