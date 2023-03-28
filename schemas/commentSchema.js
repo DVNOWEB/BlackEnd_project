@@ -1,5 +1,4 @@
 const mongoose = require('mongoose')
-
 const commentSchema = new mongoose.Schema(
   {
     case: {
@@ -16,21 +15,19 @@ const commentSchema = new mongoose.Schema(
       enum: [1, 2, 3],
       default: 1,
     },
-    
+    message: { type: String }
+
   },{ timestamps: true },
   {
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
 )
-
 commentSchema.virtual('caseDetails', {
   ref: 'Case',
   localField: 'case',
   foreignField: 'id',
   justOne: true,
 })
-
 const Comment = mongoose.model('Comment', commentSchema)
-
 module.exports = Comment
