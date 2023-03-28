@@ -252,7 +252,7 @@ let email = ''
 let newComment = {
   caseId: id,
   email: email,
-  comments: document.querySelector('.messageInput').value,
+  message: document.querySelector('.messageInput').value,
   createdAt: new Date(),
 }
 let newStatus = {}
@@ -290,7 +290,7 @@ form.addEventListener('submit', (e) => {
   newComment = {
     caseId: id,
     email: email,
-    comments: document.querySelector('.messageInput').value,
+    message: document.querySelector('.messageInput').value,
     createdAt: new Date(),
   }
 
@@ -346,7 +346,7 @@ const displayComments = (comments) => {
     commentDiv.appendChild(email)
 
     const message = document.createElement('p')
-    message.innerText = comment.comments
+    message.innerText = comment.message
     commentDiv.appendChild(message)
 
     if (comment.createdAt) {

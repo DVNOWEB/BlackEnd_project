@@ -16,6 +16,7 @@ const commentSchema = new mongoose.Schema(
       enum: [1, 2, 3],
       default: 1,
     },
+    message: { type: String }
     
   },{ timestamps: true },
   {
