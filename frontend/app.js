@@ -1,6 +1,9 @@
+// define port
+const PORT = 3000
+
 // API key
 
-const CASE_URL = 'http://localhost:8082/api/cases/'
+const CASE_URL = `http://localhost:3000/api/cases/`
 
 const email = document.querySelector('#email_input')
 const subject = document.querySelector('#subject_input')

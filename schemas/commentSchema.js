@@ -16,7 +16,7 @@ const commentSchema = new mongoose.Schema(
       default: 1,
     },
     message: { type: String }
-
+    
   },{ timestamps: true },
   {
     toJSON: { virtuals: true },
