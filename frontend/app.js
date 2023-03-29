@@ -65,6 +65,7 @@ const postCase = () => {
     .catch((err) => console.log(err))
 }
 
+
 const getCase = () => {
   return fetch(CASE_URL)
     .then((res) => res.json())
@@ -96,6 +97,8 @@ const getCase = () => {
 }
 
 const caseList = (subject, email, message, createdAt, id, statusId) => {
+  const data = new Date(createdAt).toLocaleString()
+  
   // Create the container element
   const caseContainer = document.createElement('div')
   caseContainer.classList.add('user', 'user_dark')
@@ -140,7 +143,7 @@ const caseList = (subject, email, message, createdAt, id, statusId) => {
   const timeAdd = document.createElement('span')
   timeAdd.classList.add('time_add')
   // timeAdd.textContent = time.replace('T', ' ').substring(0, 16)
-  timeAdd.textContent = createdAt
+  timeAdd.textContent = data
   // createdAt.replace('T', ' ').substring(0, 16)
 
   // Append the statusInfo and time_add elements to the inline element
