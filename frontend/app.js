@@ -182,9 +182,10 @@ const filterCases = () => {
   const filterValue = document.querySelector('#filter').value.toLowerCase()
   const filteredCases = cases.filter(
     (caseItem) =>
-      caseItem.subject.toLowerCase().includes(filterValue) ||
-      caseItem.email.toLowerCase().includes(filterValue) ||
-      caseItem.message.toLowerCase().includes(filterValue)
+      (caseItem.subject &&
+        caseItem.subject.toLowerCase().includes(filterValue)) ||
+      (caseItem.email && caseItem.email.toLowerCase().includes(filterValue)) ||
+      (caseItem.message && caseItem.message.toLowerCase().includes(filterValue))
   )
   container.innerHTML = '' // Clear the container element
   filteredCases.forEach((element) => {
@@ -198,5 +199,6 @@ const filterCases = () => {
     )
   })
 }
+
 
 document.querySelector('#filter').addEventListener('input', filterCases)
