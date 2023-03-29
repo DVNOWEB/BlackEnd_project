@@ -44,26 +44,25 @@ const postCase = () => {
     .then((data) => {
       console.log(data)
       form.reset()
-      fetch(CASE_URL)
-        .then((res) => res.json())
-        .then((data2) => {
-          cases.unshift(data2)
-          console.log(cases)
-          container.innerHTML = ''
-          cases.forEach((element) => {
-            caseList(
-              element.subject,
-              element.email,
-              element.message,
-              element.createdAt,
-              element._id,
-              element.status
-            )
-          })
-        })
+
+      // Add the newly created case to the cases array
+      cases.unshift(data)
+
+      container.innerHTML = ''
+      cases.forEach((element) => {
+        caseList(
+          element.subject,
+          element.email,
+          element.message,
+          element.createdAt,
+          element._id,
+          element.status
+        )
+      })
     })
     .catch((err) => console.log(err))
 }
+
 
 const getCase = () => {
   return fetch(CASE_URL)
