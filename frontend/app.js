@@ -44,32 +44,31 @@ const postCase = () => {
     .then((data) => {
       console.log(data)
       form.reset()
-      fetch(CASE_URL)
-        .then((res) => res.json())
-        .then((data2) => {
-          cases.unshift(data2)
-          console.log(cases)
-          container.innerHTML = ''
-          cases.forEach((element) => {
-            caseList(
-              element.subject,
-              element.email,
-              element.message,
-              element.createdAt,
-              element._id,
-              element.status
-            )
-          })
-        })
+
+      // Add the newly created case to the cases array
+      cases.unshift(data)
+
+      container.innerHTML = ''
+      cases.forEach((element) => {
+        caseList(
+          element.subject,
+          element.email,
+          element.message,
+          element.createdAt,
+          element._id,
+          element.status
+        )
+      })
     })
     .catch((err) => console.log(err))
 }
+
 
 const getCase = () => {
   return fetch(CASE_URL)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data)
+      // console.log(data)
       data.forEach((element) => {
         cases.push(element)
       })
@@ -96,6 +95,8 @@ const getCase = () => {
 }
 
 const caseList = (subject, email, message, createdAt, id, statusId) => {
+  const data = new Date(createdAt).toLocaleString()
+  
   // Create the container element
   const caseContainer = document.createElement('div')
   caseContainer.classList.add('user', 'user_dark')
@@ -110,13 +111,13 @@ const caseList = (subject, email, message, createdAt, id, statusId) => {
 
   // Create the status span elements
   const statusCompleted = document.createElement('span')
-  statusCompleted.textContent = 'Avslutad'
+  statusCompleted.textContent = 'Finished'
 
   const statusOngoing = document.createElement('span')
-  statusOngoing.textContent = 'Pågående'
+  statusOngoing.textContent = 'Ongoing'
 
   const statusNotStarted = document.createElement('span')
-  statusNotStarted.textContent = 'Ej påbörjad'
+  statusNotStarted.textContent = 'Not Started'
 
   // Add the status span elements to the statusInfo element
   statusInfo.appendChild(statusCompleted)
@@ -132,22 +133,16 @@ const caseList = (subject, email, message, createdAt, id, statusId) => {
     statusNotStarted.classList.add('red')
   }
 
-
-  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
-
-
   // Create the time_add element
   const timeAdd = document.createElement('span')
   timeAdd.classList.add('time_add')
   // timeAdd.textContent = time.replace('T', ' ').substring(0, 16)
-  timeAdd.textContent = createdAt
+  timeAdd.textContent = data
   // createdAt.replace('T', ' ').substring(0, 16)
 
   // Append the statusInfo and time_add elements to the inline element
   inlineContainer.appendChild(statusInfo)
   inlineContainer.appendChild(timeAdd)
-
-  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR  
 
 
   // Append the inline element to the caseContainer element
@@ -165,13 +160,6 @@ const caseList = (subject, email, message, createdAt, id, statusId) => {
   const messageEl = document.createElement('p')
   messageEl.classList.add('user_message')
   messageEl.textContent = message
-
-  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
-
-  // const limitedMessage = message.slice(0, 50) + '...'
-  // messageEl.textContent = limitedMessage
-
-  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
 
   // Create the "Add comment" link
   const addCommentLink = document.createElement('a')
@@ -194,9 +182,10 @@ const filterCases = () => {
   const filterValue = document.querySelector('#filter').value.toLowerCase()
   const filteredCases = cases.filter(
     (caseItem) =>
-      caseItem.subject.toLowerCase().includes(filterValue) ||
-      caseItem.email.toLowerCase().includes(filterValue) ||
-      caseItem.message.toLowerCase().includes(filterValue)
+      (caseItem.subject &&
+        caseItem.subject.toLowerCase().includes(filterValue)) ||
+      (caseItem.email && caseItem.email.toLowerCase().includes(filterValue)) ||
+      (caseItem.message && caseItem.message.toLowerCase().includes(filterValue))
   )
   container.innerHTML = '' // Clear the container element
   filteredCases.forEach((element) => {
@@ -210,6 +199,7 @@ const filterCases = () => {
     )
   })
 }
+
 
 document.querySelector('#filter').addEventListener('input', filterCases)
 
