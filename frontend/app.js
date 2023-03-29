@@ -65,7 +65,6 @@ const postCase = () => {
     .catch((err) => console.log(err))
 }
 
-
 const getCase = () => {
   return fetch(CASE_URL)
     .then((res) => res.json())
@@ -135,10 +134,6 @@ const caseList = (subject, email, message, createdAt, id, statusId) => {
     statusNotStarted.classList.add('red')
   }
 
-
-  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
-
-
   // Create the time_add element
   const timeAdd = document.createElement('span')
   timeAdd.classList.add('time_add')
@@ -149,8 +144,6 @@ const caseList = (subject, email, message, createdAt, id, statusId) => {
   // Append the statusInfo and time_add elements to the inline element
   inlineContainer.appendChild(statusInfo)
   inlineContainer.appendChild(timeAdd)
-
-  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR  
 
 
   // Append the inline element to the caseContainer element
@@ -168,13 +161,6 @@ const caseList = (subject, email, message, createdAt, id, statusId) => {
   const messageEl = document.createElement('p')
   messageEl.classList.add('user_message')
   messageEl.textContent = message
-
-  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
-
-  // const limitedMessage = message.slice(0, 50) + '...'
-  // messageEl.textContent = limitedMessage
-
-  // ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR ERROR 
 
   // Create the "Add comment" link
   const addCommentLink = document.createElement('a')
