@@ -21,23 +21,23 @@ let newComment = {
   createdAt: new Date(),
 }
 let newStatus = {}
-let caseId = null
+let statusId = null
 
 finished.addEventListener('click', (e) => {
-  if (caseId) {
-    putStatus(caseId, 3)
+  if (statusId) {
+    putStatus(statusId, 3)
   }
 })
 
 ongoing.addEventListener('click', (e) => {
-  if (caseId) {
-    putStatus(caseId, 2)
+  if (statusId) {
+    putStatus(statusId, 2)
   }
 })
 
 notStarted.addEventListener('click', (e) => {
-  if (caseId) {
-    putStatus(caseId, 1)
+  if (statusId) {
+    putStatus(statusId, 1)
   }
 })
 
@@ -57,6 +57,7 @@ form.addEventListener('submit', (e) => {
     email: email,
     message: document.querySelector('.messageInput').value,
     createdAt: new Date(),
+    statusId: statusId,
   }
 
   console.log(JSON.stringify(newComment))
@@ -183,18 +184,18 @@ const postComment = (newComment) => {
       caseId = data.id
       message = data.message
 
-      if (data.status) {
-        setStatus(data.status._id)
+      if (data.statusId) {
+        setStatus(data.statusId._id)
       }
 
       const card = document.querySelector('div')
 
       const subject = card.querySelector('h2')
       const _email = document.querySelector('.detailsEmail')
-      const message = document.querySelector('.detailsMessage')
+      const _message = document.querySelector('.detailsMessage')
       subject.innerText = data.subject
       _email.innerText = data.email
-      message.innerText = data.message
+      _message.innerText = data.message
 
       getCase() // refresh the comments section
       comments.push(data.comment) // add the new comment to the comments array

@@ -68,7 +68,7 @@ const getCase = () => {
   return fetch(CASE_URL)
     .then((res) => res.json())
     .then((data) => {
-      console.log(data)
+      // console.log(data)
       data.forEach((element) => {
         cases.push(element)
       })
@@ -111,13 +111,13 @@ const caseList = (subject, email, message, createdAt, id, statusId) => {
 
   // Create the status span elements
   const statusCompleted = document.createElement('span')
-  statusCompleted.textContent = 'Avslutad'
+  statusCompleted.textContent = 'Finished'
 
   const statusOngoing = document.createElement('span')
-  statusOngoing.textContent = 'Pågående'
+  statusOngoing.textContent = 'Ongoing'
 
   const statusNotStarted = document.createElement('span')
-  statusNotStarted.textContent = 'Ej påbörjad'
+  statusNotStarted.textContent = 'Not Started'
 
   // Add the status span elements to the statusInfo element
   statusInfo.appendChild(statusCompleted)
