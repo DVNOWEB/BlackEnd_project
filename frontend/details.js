@@ -23,24 +23,6 @@ let newComment = {
 let newStatus = {}
 let statusId = null
 
-finished.addEventListener('click', (e) => {
-  if (statusId) {
-    putStatus(statusId, 3)
-  }
-})
-
-ongoing.addEventListener('click', (e) => {
-  if (statusId) {
-    putStatus(statusId, 2)
-  }
-})
-
-notStarted.addEventListener('click', (e) => {
-  if (statusId) {
-    putStatus(statusId, 1)
-  }
-})
-
 form.addEventListener('submit', (e) => {
   e.preventDefault()
 
@@ -205,7 +187,7 @@ const postComment = (newComment) => {
 }
 
 const putStatus = (_id, statusId) => {
-  return fetch(CASE_URL, {
+  return fetch(CASE_URL + _id + '/status', {
     method: 'PUT',
     body: JSON.stringify({
       id: _id,
@@ -217,10 +199,35 @@ const putStatus = (_id, statusId) => {
   })
     .then((res) => {
       console.log(res)
+
+      if (data.statusId) {
+        setStatus(data.statusId._id)
+      }
       getCase()
     })
     .catch((err) => console.log(err))
 }
+
+finished.addEventListener('click', (e) => {
+  if (statusId) {
+    statusId = 3 // set the value of statusId to 3 when the user clicks on the finished button
+    putStatus(id, statusId)
+  }
+})
+
+ongoing.addEventListener('click', (e) => {
+  if (statusId) {
+    statusId = 2 // set the value of statusId to 2 when the user clicks on the ongoing button
+    putStatus(id, statusId)
+  }
+})
+
+notStarted.addEventListener('click', (e) => {
+  if (statusId) {
+    statusId = 1 // set the value of statusId to 1 when the user clicks on the notStarted button
+    putStatus(id, statusId)
+  }
+})
 
 getCase().then((sortedComments) => {
   comments = sortedComments
