@@ -187,11 +187,10 @@ const postComment = (newComment) => {
 }
 
 const putStatus = (_id, statusId) => {
-  return fetch(CASE_URL + _id + '/status', {
+  return fetch(CASE_URL + _id, {
     method: 'PUT',
     body: JSON.stringify({
-      id: _id,
-      statusId: statusId,
+      status: statusId,
     }),
     headers: {
       'Content-Type': 'application/json',
