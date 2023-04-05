@@ -14,12 +14,13 @@ const notStarted = document.querySelector('#red_btn')
 
 let comments = []
 let email = ''
-let newComment = {
-  case: id,
-  email: email,
-  message: document.querySelector('.messageInput').value,
-  createdAt: new Date(),
-}
+
+// let newComment = {
+//   caseId: id,
+//   email: email,
+//   message: document.querySelector('.messageInput').value,
+//   // createdAt: new Date(),
+// }
 let newStatus = {}
 // let statusId = null
 
@@ -34,12 +35,11 @@ form.addEventListener('submit', (e) => {
     return
   }
 
-  newComment = {
-    caseId: id,
+  let newComment = {
+    // caseId: id,
     email: email,
     message: document.querySelector('.messageInput').value,
-    // createdAt: new Date(),
-    // status: statusId,
+    status: statusId,
   }
 
   console.log(JSON.stringify(newComment))
@@ -113,13 +113,7 @@ const displayComments = (comments) => {
   })
 }
 
-// Call the function after the element is created
-// window.addEventListener('load', () => {
-//   const comments = [
-//     /* Your comments data */
-//   ]
-//   displayComments(comments)
-// })
+
 
 const getCase = () => {
   return fetch(CASE_URL + id)
