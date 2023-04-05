@@ -15,13 +15,13 @@ const notStarted = document.querySelector('#red_btn')
 let comments = []
 let email = ''
 let newComment = {
-  caseId: id,
+  case: id,
   email: email,
   message: document.querySelector('.messageInput').value,
   createdAt: new Date(),
 }
 let newStatus = {}
-let statusId = null
+// let statusId = null
 
 form.addEventListener('submit', (e) => {
   e.preventDefault()
@@ -38,8 +38,8 @@ form.addEventListener('submit', (e) => {
     caseId: id,
     email: email,
     message: document.querySelector('.messageInput').value,
-    createdAt: new Date(),
-    statusId: statusId,
+    // createdAt: new Date(),
+    // status: statusId,
   }
 
   console.log(JSON.stringify(newComment))
@@ -58,18 +58,22 @@ form.addEventListener('submit', (e) => {
 const setStatus = (statusId) => {
   switch (statusId) {
     case 1:
+      console.log("status id is 1")
       notStarted.checked = true
       return
 
     case 2:
+      console.log("status id is 2")
       ongoing.checked = true
       return
 
     case 3:
+      console.log("status id is 3")
       finished.checked = true
       return
 
     default:
+      console.log("no status id")
       return
   }
 }
@@ -89,13 +93,15 @@ const displayComments = (comments) => {
   comments.forEach((comment) => {
     const commentDiv = document.createElement('div')
 
-    const email = document.createElement('span')
-    email.innerText = comment.email
-    commentDiv.appendChild(email)
-
     const message = document.createElement('p')
     message.innerText = comment.message
     commentDiv.appendChild(message)
+
+
+    const email = document.createElement('p')
+    email.innerText = comment.email
+    commentDiv.appendChild(email)
+
 
     if (comment.createdAt) {
       const time = document.createElement('span')
@@ -108,23 +114,27 @@ const displayComments = (comments) => {
 }
 
 // Call the function after the element is created
-window.addEventListener('load', () => {
-  const comments = [
-    /* Your comments data */
-  ]
-  displayComments(comments)
-})
+// window.addEventListener('load', () => {
+//   const comments = [
+//     /* Your comments data */
+//   ]
+//   displayComments(comments)
+// })
 
 const getCase = () => {
   return fetch(CASE_URL + id)
     .then((res) => res.json())
     .then((data) => {
+      console.log("got case:")
       console.log(data)
       email = data.email
       caseId = data.id
+      statusId = data.status
 
       if (data.status) {
-        setStatus(data.status._id)
+        console.log("case status:")
+        console.log(data.status)
+        setStatus(data.status)
       }
 
       const card = document.querySelector('div')
@@ -167,7 +177,7 @@ const postComment = (newComment) => {
       message = data.message
 
       if (data.statusId) {
-        setStatus(data.statusId._id)
+        setStatus(data.statusId)
       }
 
       const card = document.querySelector('div')
@@ -196,11 +206,14 @@ const putStatus = (_id, statusId) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((res) => {
-      console.log(res)
+
+  .then((res) => res.json()) // parse the response as JSON
+  .then((data) => {
+    // .then((res) => {
+      console.log(data)
 
       if (data.statusId) {
-        setStatus(data.statusId._id)
+        setStatus(data.statusId)
       }
       getCase()
     })
@@ -208,24 +221,35 @@ const putStatus = (_id, statusId) => {
 }
 
 finished.addEventListener('click', (e) => {
-  if (statusId) {
-    statusId = 3 // set the value of statusId to 3 when the user clicks on the finished button
-    putStatus(id, statusId)
-  }
+  console.log("Change status to finnished")
+  console.log("case id")
+  console.log(id)
+  statusId = 3 // set the value of statusId to 3 when the user clicks on the finished button
+  console.log("status id:")
+  console.log(statusId)
+  putStatus(id, statusId)
+
 })
 
 ongoing.addEventListener('click', (e) => {
-  if (statusId) {
-    statusId = 2 // set the value of statusId to 2 when the user clicks on the ongoing button
-    putStatus(id, statusId)
-  }
+  console.log("Change status to ongoing")
+  console.log("case id")
+  console.log(id)
+  statusId = 2 // set the value of statusId to 2 when the user clicks on the ongoing button
+  console.log("status id:")
+  console.log(statusId)
+  putStatus(id, statusId)
 })
 
 notStarted.addEventListener('click', (e) => {
-  if (statusId) {
-    statusId = 1 // set the value of statusId to 1 when the user clicks on the notStarted button
-    putStatus(id, statusId)
-  }
+  console.log("Change status to not started")
+  console.log("case id")
+  console.log(id)
+  statusId = 1 // set the value of statusId to 1 when the user clicks on the notStarted button
+  console.log("status id:")
+  console.log(statusId)
+  putStatus(id, statusId)
+
 })
 
 getCase().then((sortedComments) => {
