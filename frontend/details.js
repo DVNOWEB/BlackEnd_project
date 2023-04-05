@@ -21,31 +21,31 @@ let newComment = {
   createdAt: new Date(),
 }
 let newStatus = {}
-let statusId = null
+// let statusId = null
 
 form.addEventListener('submit', (e) => {
   e.preventDefault()
-
+  
   const email = document.querySelector('.emailInput').value.trim() // get email input value and remove whitespace
-
+  
   if (email.length === 0) {
     // if email is empty, show an error message to the user
     alert('Please enter your email.')
     return
   }
-
+  
   newComment = {
     caseId: id,
     email: email,
     message: document.querySelector('.messageInput').value,
     createdAt: new Date(),
-    statusId: statusId,
+    status: statusId,
   }
-
+  
   console.log(JSON.stringify(newComment))
   document.querySelector('.emailInput').value = ''
   document.querySelector('.messageInput').value = ''
-
+  
   postComment(newComment).then((res) => {
     // Add the new comment to the comments array and display the updated comments
     comments.push(newComment)
@@ -86,6 +86,7 @@ const displayComments = (comments) => {
     return
   }
 
+
   comments.forEach((comment) => {
     const commentDiv = document.createElement('div')
 
@@ -107,14 +108,6 @@ const displayComments = (comments) => {
   })
 }
 
-// Call the function after the element is created
-window.addEventListener('load', () => {
-  const comments = [
-    /* Your comments data */
-  ]
-  displayComments(comments)
-})
-
 const getCase = () => {
   return fetch(CASE_URL + id)
     .then((res) => res.json())
@@ -124,7 +117,7 @@ const getCase = () => {
       caseId = data.id
 
       if (data.status) {
-        setStatus(data.status._id)
+        setStatus(data.status)
       }
 
       const card = document.querySelector('div')
@@ -167,7 +160,7 @@ const postComment = (newComment) => {
       message = data.message
 
       if (data.statusId) {
-        setStatus(data.statusId._id)
+        setStatus(data.statusId)
       }
 
       const card = document.querySelector('div')
@@ -196,8 +189,8 @@ const putStatus = (_id, statusId) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((res) => {
-      console.log(res)
+    .then((res) => res.json())
+    .then((data) => {
 
       if (data.statusId) {
         setStatus(data.statusId._id)
@@ -208,24 +201,21 @@ const putStatus = (_id, statusId) => {
 }
 
 finished.addEventListener('click', (e) => {
-  if (statusId) {
-    statusId = 3 // set the value of statusId to 3 when the user clicks on the finished button
-    putStatus(id, statusId)
-  }
+  console.log('finished status')
+  statusId = 3 // set the value of statusId to 3 when the user clicks on the finished button
+  putStatus(id, statusId)
 })
 
 ongoing.addEventListener('click', (e) => {
-  if (statusId) {
-    statusId = 2 // set the value of statusId to 2 when the user clicks on the ongoing button
-    putStatus(id, statusId)
-  }
+  console.log('ongoing status')
+  statusId = 2 // set the value of statusId to 2 when the user clicks on the ongoing button
+  putStatus(id, statusId)
 })
 
 notStarted.addEventListener('click', (e) => {
-  if (statusId) {
-    statusId = 1 // set the value of statusId to 1 when the user clicks on the notStarted button
-    putStatus(id, statusId)
-  }
+  console.log('notStarted status')
+  statusId = 1 // set the value of statusId to 1 when the user clicks on the notStarted button
+  putStatus(id, statusId)
 })
 
 getCase().then((sortedComments) => {
