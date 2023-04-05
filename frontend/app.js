@@ -68,7 +68,6 @@ const getCase = () => {
   return fetch(CASE_URL)
     .then((res) => res.json())
     .then((data) => {
-      // console.log(data)
       data.forEach((element) => {
         cases.push(element)
       })

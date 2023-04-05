@@ -33,7 +33,7 @@ const createComment = async (req, res, next) => {
     })
 
     const newComment = new Comment({
-      case: id,
+      caseId: id,
       email,
       message,
       status,
