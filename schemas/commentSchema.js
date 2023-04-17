@@ -18,8 +18,9 @@ const commentSchema = new mongoose.Schema(
     },
     message: { type: String }
     
-  },{ timestamps: true },
-  {
+  },
+  { 
+    timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }
@@ -27,10 +28,11 @@ const commentSchema = new mongoose.Schema(
 
 commentSchema.virtual('caseDetails', {
   ref: 'Case',
-  localField: 'case',
-  foreignField: 'id',
+  localField: 'caseId',
+  foreignField: '_id',
   justOne: true,
 })
+
 
 const Comment = mongoose.model('Comment', commentSchema)
 

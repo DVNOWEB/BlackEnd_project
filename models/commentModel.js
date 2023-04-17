@@ -26,17 +26,16 @@ const updateCaseStatus = async (req, res, next) => {
 const createComment = async (req, res, next) => {
   try {
     const { id } = req.params
-    const { email, message, status } = req.body
+    const { email, message } = req.body
     const singleCase = await Case.findById(id).populate({
       path: 'comments',
-      populate: { path: 'case', select: '_id' },
+      populate: { path: 'caseId', select: '_id' },
     })
 
     const newComment = new Comment({
       caseId: id,
       email,
       message,
-      status,
     })
 
     await newComment.save()
@@ -56,7 +55,7 @@ const createComment = async (req, res, next) => {
 const getCommentsByCaseId = async (req, res, next) => {
   try {
     const { id } = req.params
-    const comments = await Comment.find({ case: id }).lean()
+    const comments = await Comment.find({ caseId: id }).lean()
     res.json(comments)
   } catch (err) {
     res.status(404).json({
