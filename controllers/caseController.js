@@ -12,7 +12,7 @@ router.get('/:id', caseModel.getCaseById)
 // Create a new case
 router.post('/', caseModel.createCase)
 
-// // UPDATE
+// Update case/status
 router.put('/:id', caseModel.updateCase)
 
 // // DELETE

@@ -84,6 +84,7 @@ const sortComments = (comments) => {
 
 const displayComments = (comments) => {
   const commentList = document.querySelector('#commentList')
+  
   commentList.innerHTML = '' // clear the comment list before adding new comments
 
   if (!commentList) {
@@ -93,12 +94,12 @@ const displayComments = (comments) => {
   comments.forEach((comment) => {
     const commentDiv = document.createElement('div')
 
-    const message = document.createElement('p')
-    message.innerText = comment.message
-    commentDiv.appendChild(message)
+    let newComment = document.createElement('p')
+    newComment.innerText = comment.message
+    commentDiv.appendChild(newComment)
 
 
-    const email = document.createElement('p')
+    let email = document.createElement('p')
     email.innerText = comment.email
     commentDiv.appendChild(email)
 

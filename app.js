@@ -5,9 +5,6 @@ const path = require('path')
 
 app.use(express.static(path.join(__dirname, 'frontend')))
 
-// app.use(express.json())
-// app.use(express.urlencoded({ extended: false }))
-
 // Import Routes
 const caseController = require('./controllers/caseController')
 const commentController = require('./controllers/commentController')
